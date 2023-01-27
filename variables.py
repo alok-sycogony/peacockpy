@@ -11,3 +11,41 @@ b = 2
 add = addition(a, b)
 print(add)
 print("\n")
+
+def subtraction(x, y):
+    print("Performing Subtraction")
+    return x - y
+
+def multiplication(x, y):
+    print("Performing Multiplication")
+    return x * y
+def division(x, y):
+    print("Performing Division")
+    return x / y
+def modulus(x, y):
+    print("Performing Modulus")
+    return x % y
+def exponential(x, y):
+    print("Performing Exponentiation")
+    return x ** y
+#    if _name_== '_main_':
+# Subtraction
+sub = subtraction(a, b)
+print(sub)
+print("\n")
+# Multiplication
+mul = multiplication(a, b)
+print(mul)
+print("\n")
+# Division
+div = division(a, b)
+print(div)
+print("\n")
+# Modulus
+mod = modulus(a, b)
+print(mod)
+print("\n")
+# Exponential
+exp = exponential(a, b)
+print(exp)
+print("\n")
