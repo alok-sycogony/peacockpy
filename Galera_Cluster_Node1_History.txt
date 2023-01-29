@@ -1,0 +1,268 @@
+root@node1:~# history
+    1  vi /etc/ssh/sshd_config
+    2  ufw allow 2282
+    3  ufw allow ssh
+    4  ufw enable
+    5  service sshd restart
+    6  exit
+    7  ip a
+    8  screen -d -r
+    9  exit
+   10  ip a
+   11  screen
+   12  screen -d -r
+   13  exit
+   14  blkid
+   15  df -h
+   16  systemctl status mysql
+   17  systemctl enable mysql
+   18  systemctl status mysql
+   19  systemctl stop mysql
+   20  systemctl status mysql
+   21  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+   22  ip a
+   23  passwd root
+   24  ip a
+   25  cat /etc/mysql/mysql.conf.d/mysqld.cnf | grep 192.168.0.4
+   26  systemctl status mysql
+   27  ip a
+   28  mysqld_bootstrap
+   29  mysql -uroot -p -e "show status like 'wsrep_cluster_size'"
+   30  ip a
+   31  mysql -u root -p
+   32  mysql -uroot -p -e "show status like 'wsrep_cluster_size'"
+   33  ip a
+   34  date
+   35  timedatectl
+   36  timedatectl set-timezone Asia/Kolkata
+   37  date
+   38  ip a
+   39  mysql -uroot -p -e "show status like 'wsrep_cluster_size'"
+   40  ss -tulpen
+   41  ip a
+   42  less /etc/mysql/mysql.conf.d/mysqld.cnf
+   43  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+   44  less /var/log/mysql/error.log
+   45  ip a
+   46  exit
+   47  ip a
+   48  apt update
+   49  apt upgrade
+   50  ip a
+   51  ll /etc/apt/sources.list.d/galera.list
+   52  vim /etc/apt/sources.list.d/galera.list
+   53  cat /etc/apt/sources.list.d/galera.list
+   54  ip a
+   55  vim /etc/apt/preferences.d/galera.pref
+   56  apt update
+   57  ip a
+   58  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D669017EBC19DDBA
+   59  apt-key list
+   60  apt update
+   61  screen
+   62  screen -d -r
+   63  ip a
+   64  screen
+   65  ip a
+   66  telnet 192.168.0.5 4567
+   67  hostnamectl
+   68  hostnamectl set-hostname node1
+   69  hostnamectl
+   70  ip a
+   71  vim /etc/hosts
+   72  ping node1
+   73  cat /etc/hosts
+   74  ip a
+   75  ss -tulpen
+   76  ping node1
+   77  ping node2
+   78  vim /etc/hosts
+   79  ip a
+   80  cat /etc/hosts
+   81  ping node1
+   82  ping node2
+   83  ping node3
+   84  ip a
+   85  tail -f /var/log/mysql/error.log
+   86  ip a
+   87  systemctl status apparmor
+   88  systemctl stop apparmor
+   89  systemctl status apparmor
+   90  systemctl disable apparmor
+   91  systemctl status apparmor
+   92  ip a
+   93  exit
+   94  ip a
+   95  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+   96  tail -f /var/log/mysql/error.log
+   97  ip a
+   98  tail -f /var/log/mysql/error.log
+   99  ip a
+  100  date
+  101  ip a
+  102  tail -f /var/log/mysql/error.log
+  103  ip a
+  104  cat /var/log/mysql/error.log
+  105  ss -tulpen
+  106  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+  107  ip a
+  108  vim /etc/mysql/mysql.conf.d/mysqld.cnf
+  109  systemctl status mysql
+  110  systemctl stop mysql
+  111  systemctl status mysql
+  112  mysqld_bootstrap
+  113  systemctl status mysql
+  114  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+  115  less /var/log/mysql/error.log
+  116  systemctl status
+  117  ip a
+  118  exit
+  119  ip a
+  120  exit
+  121  systemctl status mysql
+  122  vim /etc/mysql/mysql.conf.d/mysqld.cnf
+  123  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+  124  systemctl status mysql
+  125  history
+  126  mysqld_bootstrap
+  127  systemctl status mysql
+  128  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+  129  cat /var/log/mysql/error.log
+  130  systemctl start mysql
+  131  systemctl status mysql
+  132  cat /var/log/mysql/error.log
+  133  ll
+  134  ip a
+  135  ssh-keygen -t rsa
+  136  ll
+  137  ll .ssh/
+  138  ip a
+  139  ssh-copy-id 192.168.0.5
+  140  ss -tulpen | grep ssh
+  141  vim /etc/ssh/sshd_config
+  142  systemctl status sshd
+  143  systemctl restart sshd
+  144  systemctl status sshd
+  145  ip a
+  146  ssh-copy-id 192.168.0.5
+  147  ip a
+  148  ssh 192.168.0.5
+  149  ssh-copy-id 192.168.0.6
+  150  ssh 192.168.0.6
+  151  ip a
+  152  systemctl status sshd
+  153  systemctl status mysql
+  154  ip a
+  155  cat /var/log/mysql/error.log
+  156  systemctl start mysql
+  157  systemctl status mysql
+  158  cat /var/log/mysql/error.log
+  159  vim /etc/mysql/mysql.conf.d/mysqld.cnf
+  160  systemctl start mysql
+  161  systemctl status mysql
+  162  cat /var/log/mysql/error.log
+  163  ss -tulpen
+  164  ip a
+  165  systemctl restart mysql
+  166  systemctl status mysql
+  167  cat /var/log/mysql/error.log
+  168  systemctl stop mysql
+  169  cat /var/log/mysql/error.log
+  170  vim /etc/mysql/mysql.conf.d/mysqld.cnf
+  171  systemctl status mysql
+  172  mysqld_bootstrap
+  173  systemctl status mysql
+  174  cat /var/log/mysql/error.log
+  175  cd /var/lib/mysql
+  176  ll
+  177  ll grastate.dat
+  178  cat grastate.dat
+  179  vim grastate.dat
+  180  cd
+  181  mysqld_bootstrap
+  182  cat /var/log/mysql/error.log
+  183  systemctl status mysql
+  184  cat /var/log/mysql/error.log
+  185  ip a
+  186  mysql -u root -p -e "show status like 'wsrep_cluster_size'”
+  187  mysql -uroot -p -e "show status like 'wsrep_cluster_size'"
+  188  mysql -u root -p
+  189  mysql -uroot -p -e "show status like 'wsrep_cluster_size'"
+  190  ipa
+  191  ip a
+  192  history
+  193  mysql -uroot -p -e "show status like 'wsrep_cluster_size'"
+  194  ip a
+  195  history
+  196  systemctl status apparmor
+  197  apparmor_status
+  198  aa-status
+  199  systemctl status apparmor
+  200  systemctl status mysql
+  201  uptime
+  202  ip a
+  203  reboot
+  204  ip a
+  205  history
+  206  screen -d -r
+  207  apt update
+  208  apt install galera-4 mysql-wsrep-8.0
+  209  cat /etc/mysql/mysql.cnf
+  210  ip a
+  211  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+  212  vim /etc/mysql/mysql.conf.d/mysqld.cnf
+  213  mysql -u root -p
+  214  ip a
+  215  systemctl status apparmor
+  216  systemctl status mysql
+  217  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+  218  cat /var/log/mysql/error.log
+  219  aa-status
+  220  cat /etc/default/grub.d
+  221  ls /etc/default/grub.d
+  222  cat /etc/default/grub.d/init-select.cfg
+  223  mkdir -p /etc/default/grub.d
+  224  ls /etc/default/grub.d
+  225  ip a
+  226  echo 'GRUB_CMDLINE_LINUX_DEFAULT="$GRUB_CMDLINE_LINUX_DEFAULT apparmor=0"'   | sudo tee /etc/default/grub.d/apparmor.cfg
+  227  update-grub
+  228  reboot
+  229  ip a
+  230  aa-status
+  231  systemctl status apparmor
+  232  systemctl status mysql
+  233  mysqld_bootstrap
+  234  systemctl status mysql
+  235  cat /var/log/mysql/error.log
+  236  cd /var/lib/mysql
+  237  ll
+  238  cat grastate.dat
+  239  vim grastate.dat
+  240  mysqld_bootstrap
+  241  cat /var/log/mysql/error.log
+  242  systemctl status mysql
+  243  ip a
+  244  aa-status
+  245  apparmor_status
+  246  cat /var/log/mysql/error.log
+  247  cd
+  248  mysql -uroot -p -e "show status like 'wsrep_cluster_size'"
+  249  cat /var/log/mysql/error.log
+  250  mysql -uroot -p -e "show status like 'wsrep_cluster_size'"
+  251  mysql
+  252  mysql -u root
+  253  mysql -u root -p
+  254  cat /var/log/mysql/error.log
+  255  ip a
+  256  mysql -u root -p
+  257  cat /var/log/mysql/error.log
+  258  mysql -u root -p
+  259  cat /var/log/mysql/error.log
+  260  mysql -u root -p
+  261  cat /var/log/mysql/error.log
+  262  history
+  263  cat /var/log/mysql/error.log
+  264  mysql -uroot -p -e "show status like 'wsrep_cluster_size'"
+  265  mysql -uroot -p
+  266  history
+
