@@ -1,0 +1,221 @@
+root@node2:~# history
+    1  vi /etc/ssh/sshd_config
+    2  passwd root
+    3  ufw allow 2282
+    4  ufw allow ssh
+    5  ufw enable
+    6  service sshd restart
+    7  vi /etc/ssh/sshd_config
+    8  hostname
+    9  ip a
+   10  ping yahoo.com
+   11  cat /etc/resolv.conf
+   12  ip a
+   13  ss -tulpen
+   14  ping yahoo.com
+   15  ping google.com
+   16  cat /etc/os-release
+   17  apt update
+   18  apt upgrade
+   19  ip a
+   20  cat /etc/apt/sources.list.d/galera.list
+   21  hostname
+   22  cd /etc/apt/sources.list.d//etc/apt/sources.list.d/
+   23  cd /etc/apt/sources.list.d
+   24  ll
+   25  ls -l
+   26  pwd
+   27  vim /etc/apt/sources.list.d/galera.list
+   28  cat /etc/os-release
+   29  vim /etc/apt/preferences.d/galera.pref
+   30  # Prefer the Codership repository
+   31  Package: *
+   32  Pin: origin releases.galeracluster.com
+   33  apt update
+   34  ip a
+   35  history
+   36  apt update
+   37  ip a
+   38  cat /etc/mysql/mysql.conf.d/mysqld.cnf| grep 192.168.0.5
+   39  systemctl status mysql
+   40  ip a
+   41  systemctl status mysql
+   42  ip a
+   43  systemctl start mysql
+   44  systemctl status mysql
+   45  ip a
+   46  timedatectl
+   47  date
+   48  timedatectl set-timezone Asia/Kolkata
+   49  date
+   50  ip a
+   51  exit
+   52  history
+   53  ip a
+   54  systemctl status mysql
+   55  ip a
+   56  date
+   57  timedatectl
+   58  timedatectl --list
+   59  timedatectl --help
+   60  timedatectl list-timezones
+   61  timedatectl -h
+   62  timedatectl set-timezone Asia/Kolkata
+   63  date
+   64  timedatectl
+   65  ip a
+   66  date
+   67  ip a
+   68  date
+   69  history
+   70  date
+   71  ipa
+   72  ip a
+   73  systemctl status mysql
+   74  systemctl start mysql
+   75  systemctl status mysql
+   76  ping 192.168.0.4
+   77  telnet
+   78  telnet 192.168.0.4 3306
+   79  telnet 192.168.0.4 4567
+   80  telnet 192.168.0.4 4568
+   81  ip a
+   82  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+   83  exit
+   84  ip a
+   85  apt-key list
+   86  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D669017EBC19DDBA
+   87  apt-key list
+   88  apt update
+   89  cat /etc/resolv.conf
+   90  apt update
+   91  screen
+   92  history
+   93  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+   94  tail -f /var/log/mysql/error.log
+   95  less /var/log/mysql/error.log
+   96  ip a
+   97  less /var/log/mysql/error.log
+   98  ip a
+   99  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+  100  ip a
+  101  systemctl status mysql
+  102  systemctl status mysql -l
+  103  systemctl start mysql
+  104  ip a
+  105  less /var/log/mysql/error.log
+  106  ping admin1
+  107  hostnamectl set-hostname=node2
+  108  hostnamectl set-hostname node2
+  109  hostnamectl
+  110  ip a
+  111  vim /etc/hosts
+  112  ping node1
+  113  ping node2
+  114  ping node3
+  115  ip a
+  116  systemctl status mysql -l
+  117  systemctl start mysql
+  118  systemctl status mysql
+  119  ip a
+  120  systemctl status apparmor
+  121  systemctl stop apparmor
+  122  systemctl disable apparmor
+  123  systemctl status apparmor
+  124  ip a
+  125  systemctl status mysql
+  126  systemctl status apparmor
+  127  systemctl start mysql
+  128  systemctl status mysql
+  129  ll
+  130  ls -l
+  131  systemctl status mysql
+  132  ip a
+  133  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+  134  less /var/log/mysql/error.log
+  135  ping 192.168.0.4
+  136  ping 192.168.0.5
+  137  ping 192.168.0.6
+  138  ip a
+  139  cat /var/log/mysql/error.log
+  140  ip a
+  141  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+  142  ip a
+  143  exit
+  144  ip a
+  145  exit
+  146  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+  147  tail -f /var/log/mysql/error.log
+  148  ip a
+  149  ssh-copy-id 192.168.0.5
+  150  exit
+  151  vim /etc/ssh/sshd_config
+  152  systemctl status sshd
+  153  systemctl restart sshd
+  154  systemctl status sshd
+  155  ip a
+  156  systemctl start mysql
+  157  systemctl status mysql
+  158  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+  159  cat /var/log/mysql/error.log
+  160  systemctl status mysql
+  161  cat /var/log/mysql/error.log
+  162  telnet 192.168.0.4 3306
+  163  telnet 192.168.0.4 33060
+  164  ip a
+  165  systemctl status mysql
+  166  systemctl start mysql
+  167  systemctl status mysql
+  168  ip a
+  169  ssh-keygen -t rsa
+  170  ssh-copy-id 192.168.0.4
+  171  ssh 192.168.0.4
+  172  ssh-copy-id 192.168.0.5
+  173  ssh-copy-id 192.168.0.6
+  174  ip a
+  175  systemctl status mysql
+  176  cat /etc/apparmor.d/ | grep mysql
+  177  ls /etc/apparmor.d/
+  178  ip a
+  179  aa-status
+  180  ip a
+  181  systemctl status mysql
+  182  aa-status
+  183  mkdir -p /etc/default/grub.d
+  184  echo 'GRUB_CMDLINE_LINUX_DEFAULT="$GRUB_CMDLINE_LINUX_DEFAULT apparmor=0"'   | sudo tee /etc/default/grub.d/apparmor.cfg
+  185  update-grub
+  186  reboot
+  187  vi /etc/netplan/00-installer-config.yaml
+  188  netplan try
+  189  vi /etc/ssh/sshd_config
+  190  apt install galera-4 mysql-wsrep-8.0
+  191  ll /etc/mysql/mysql.conf.d/mysqld.cnf
+  192  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+  193  pwd
+  194  ip a
+  195  systemctl status mysql
+  196  df -h
+  197  blkid
+  198  vim /etc/mysql/mysql.conf.d/mysqld.cnf
+  199  systemctl status mysql
+  200  systemctl enable mysql
+  201  mysql -u root -p
+  202  ip a
+  203  systemctl status mysql
+  204  systemctl stop mysql
+  205  systemctl status mysql
+  206  ip a
+  207  aa-status
+  208  systemctl status mysql
+  209  cat /var/log/mysql/error.log
+  210  ip a
+  211  cat /var/log/mysql/error.log
+  212  mysql -u root -p
+  213  ip a
+  214  mysql -u root -p
+  215  cat /var/log/mysql/error.log
+  216  mysql -u root -p
+  217  ll
+  218  mysql -u root -p
+  219  history
+
