@@ -1,0 +1,400 @@
+After Installing Mysql 8 and entering configuration in file /etc/mysql/mysql.conf.d/mysqld.cnf
+
+node1    vim /etc/mysql/mysql.conf.d/mysqld.cnf
+
+default_storage_engine=InnoDB
+innodb_autoinc_lock_mode=2
+innodb_flush_log_at_trx_commit=0
+innodb_buffer_pool_size=128M
+binlog_format=ROW
+wsrep_on=ON
+wsrep_provider=/usr/lib/galera/libgalera_smm.so
+wsrep_node_name="node1"
+wsrep_node_address="192.168.0.4"
+wsrep_cluster_name="galera_cluster"
+wsrep_cluster_address="gcomm://192.168.0.4,192.168.0.5,192.168.0.6"
+wsrep_provider_options="gcache.size=128M; gcache.page_size=128M"
+wsrep_slave_threads=4
+wsrep_sst_method=rsync
+
+
+node2    vim /etc/mysql/mysql.conf.d/mysqld.cnf
+
+default_storage_engine=InnoDB
+innodb_autoinc_lock_mode=2
+innodb_flush_log_at_trx_commit=0
+innodb_buffer_pool_size=128M
+binlog_format=ROW
+wsrep_on=ON
+wsrep_provider=/usr/lib/galera/libgalera_smm.so
+wsrep_node_name="node2"
+wsrep_node_address="192.168.0.5"
+wsrep_cluster_name="galera_cluster"
+wsrep_cluster_address="gcomm://192.168.0.4,192.168.0.5,192.168.0.6"
+wsrep_provider_options="gcache.size=128M; gcache.page_size=128M"
+wsrep_slave_threads=4
+wsrep_sst_method=rsync
+
+
+
+node3    vim /etc/mysql/mysql.conf.d/mysqld.cnf
+
+default_storage_engine=InnoDB
+innodb_autoinc_lock_mode=2
+innodb_flush_log_at_trx_commit=0
+innodb_buffer_pool_size=128M
+binlog_format=ROW
+wsrep_on=ON
+wsrep_provider=/usr/lib/galera/libgalera_smm.so
+wsrep_node_name="node3"
+wsrep_node_address="192.168.0.6"
+wsrep_cluster_name="galera_cluster"
+wsrep_cluster_address="gcomm://192.168.0.4,192.168.0.5,192.168.0.6"
+wsrep_provider_options="gcache.size=128M; gcache.page_size=128M"
+wsrep_slave_threads=4
+wsrep_sst_method=rsync
+
+The mysql service started on first master node and gives no error
+but when we install second and third node it gives following error.
+
+2023-01-28T10:14:30.990541Z 0 [System] [MY-013169] [Server] /usr/sbin/mysqld (mysqld 8.0.30-26.11) initializing of server in progress as process 27257
+2023-01-28T10:14:31.002125Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2023-01-28T10:14:31.757658Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2023-01-28T10:14:34.133171Z 6 [Warning] [MY-010453] [Server] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure
+option.
+2023-01-28T10:14:38.964573Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.30-26.11) starting as process 27312
+2023-01-28T10:14:38.977706Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2023-01-28T10:14:39.358713Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2023-01-28T10:14:39.725060Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2023-01-28T10:14:39.725104Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2023-01-28T10:14:39.727791Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/tmp' in the path is accessible to all OS users. Consider
+choosing a different directory.
+2023-01-28T10:14:39.759228Z 7 [System] [MY-013172] [Server] Received SHUTDOWN from user boot. Shutting down mysqld (Version: 8.0.30-26.11).
+2023-01-28T10:14:39.760451Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060, socket: /var/run/mysqld/mysqlx.sock
+2023-01-28T10:14:41.358368Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.30-26.11)  MySQL Wsrep Server - GPL.
+2023-01-28T10:14:43.150645Z 0 [Note] [MY-010949] [Server] Basedir set to /usr/.
+2023-01-28T10:14:43.150672Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.30-26.11) starting as process 27504
+2023-01-28T10:14:43.157887Z 0 [Note] [MY-012366] [InnoDB] Using Linux native AIO
+2023-01-28T10:14:43.158123Z 0 [Note] [MY-010747] [Server] Plugin 'FEDERATED' is disabled.
+2023-01-28T10:14:43.160742Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2023-01-28T10:14:43.160853Z 1 [Note] [MY-013546] [InnoDB] Atomic write enabled
+2023-01-28T10:14:43.160918Z 1 [Note] [MY-012932] [InnoDB] PUNCH HOLE support available
+2023-01-28T10:14:43.160939Z 1 [Note] [MY-012944] [InnoDB] Uses event mutexes
+2023-01-28T10:14:43.160955Z 1 [Note] [MY-012945] [InnoDB] GCC builtin __atomic_thread_fence() is used for memory barrier
+2023-01-28T10:14:43.160966Z 1 [Note] [MY-012948] [InnoDB] Compressed tables use zlib 1.2.12
+2023-01-28T10:14:43.164811Z 1 [Note] [MY-013251] [InnoDB] Number of pools: 1
+2023-01-28T10:14:43.164993Z 1 [Note] [MY-012951] [InnoDB] Using hardware accelerated crc32 and polynomial multiplication.
+2023-01-28T10:14:43.165661Z 1 [Note] [MY-012203] [InnoDB] Directories to scan './'
+2023-01-28T10:14:43.165720Z 1 [Note] [MY-012204] [InnoDB] Scanning './'
+2023-01-28T10:14:43.167315Z 1 [Note] [MY-012208] [InnoDB] Completed space ID check of 4 files.
+2023-01-28T10:14:43.168269Z 1 [Note] [MY-012955] [InnoDB] Initializing buffer pool, total size = 128.000000M, instances = 1, chunk size =128.000000M
+2023-01-28T10:14:43.177862Z 1 [Note] [MY-012957] [InnoDB] Completed initialization of buffer pool
+2023-01-28T10:14:43.183536Z 0 [Note] [MY-011952] [InnoDB] If the mysqld execution user is authorized, page cleaner thread priority can be changed. See the man page of s
+etpriority().
+2023-01-28T10:14:43.183840Z 1 [Note] [MY-013532] [InnoDB] Using './#ib_16384_0.dblwr' for doublewrite
+2023-01-28T10:14:43.184460Z 1 [Note] [MY-013532] [InnoDB] Using './#ib_16384_1.dblwr' for doublewrite
+2023-01-28T10:14:43.199703Z 1 [Note] [MY-013566] [InnoDB] Double write buffer files: 2
+2023-01-28T10:14:43.199780Z 1 [Note] [MY-013565] [InnoDB] Double write buffer pages per instance: 4
+2023-01-28T10:14:43.199825Z 1 [Note] [MY-013532] [InnoDB] Using './#ib_16384_0.dblwr' for doublewrite
+2023-01-28T10:14:43.199855Z 1 [Note] [MY-013532] [InnoDB] Using './#ib_16384_1.dblwr' for doublewrite
+2023-01-28T10:14:43.418056Z 1 [Note] [MY-013883] [InnoDB] The latest found checkpoint is at lsn = 19287096 in redo log file ./#innodb_redo/#ib_redo5.
+2023-01-28T10:14:43.418277Z 1 [Note] [MY-013086] [InnoDB] Starting to parse redo log at lsn = 19287096, whereas checkpoint_lsn = 19287096 and start_lsn = 19287040
+2023-01-28T10:14:43.424518Z 1 [Note] [MY-013083] [InnoDB] Log background threads are being started...
+2023-01-28T10:14:43.425545Z 1 [Note] [MY-012532] [InnoDB] Applying a batch of 0 redo log records ...
+2023-01-28T10:14:43.425578Z 1 [Note] [MY-012535] [InnoDB] Apply batch completed!
+2023-01-28T10:14:43.425868Z 1 [Note] [MY-013252] [InnoDB] Using undo tablespace './undo_001'.
+2023-01-28T10:14:43.426287Z 1 [Note] [MY-013252] [InnoDB] Using undo tablespace './undo_002'.
+2023-01-28T10:14:43.426904Z 1 [Note] [MY-012910] [InnoDB] Opened 2 existing undo tablespaces.
+2023-01-28T10:14:43.426976Z 1 [Note] [MY-011980] [InnoDB] GTID recovery trx_no: 1293
+2023-01-28T10:14:43.434498Z 1 [Note] [MY-013776] [InnoDB] Parallel initialization of rseg complete
+2023-01-28T10:14:43.434606Z 1 [Note] [MY-013777] [InnoDB] Time taken to initialize rseg using 4 thread: 7636 ms.
+2023-01-28T10:14:43.434848Z 1 [Note] [MY-012923] [InnoDB] Creating shared tablespace for temporary tables
+2023-01-28T10:14:43.435028Z 1 [Note] [MY-012265] [InnoDB] Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2023-01-28T10:14:43.485599Z 1 [Note] [MY-012266] [InnoDB] File './ibtmp1' size is now 12 MB.
+2023-01-28T10:14:43.486075Z 1 [Note] [MY-013627] [InnoDB] Scanning temp tablespace dir:'./#innodb_temp/'
+2023-01-28T10:14:43.515288Z 1 [Note] [MY-013018] [InnoDB] Created 128 and tracked 128 new rollback segment(s) in the temporary tablespace. 128 are now active.
+2023-01-28T10:14:43.515840Z 1 [Note] [MY-012976] [InnoDB] 8.0.30 started; log sequence number 19287106
+2023-01-28T10:14:43.516544Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2023-01-28T10:14:43.525086Z 1 [Note] [MY-011089] [Server] Data dictionary restarting version '80023'.
+2023-01-28T10:14:43.637214Z 1 [Note] [MY-012357] [InnoDB] Reading DD tablespace files
+2023-01-28T10:14:43.638308Z 1 [Note] [MY-012356] [InnoDB] Scanned 6 tablespaces. Validated 6.
+2023-01-28T10:14:43.656060Z 1 [Note] [MY-010006] [Server] Using data dictionary with version '80023'.
+2023-01-28T10:14:43.666545Z 0 [Note] [MY-011332] [Server] Plugin mysqlx reported: 'IPv6 is available'
+2023-01-28T10:14:43.666810Z 0 [Note] [MY-011323] [Server] Plugin mysqlx reported: 'X Plugin ready for connections. bind-address: '::' port: 33060'
+2023-01-28T10:14:43.666835Z 0 [Note] [MY-011323] [Server] Plugin mysqlx reported: 'X Plugin ready for connections. socket: '/var/run/mysqld/mysqlx.sock''
+2023-01-28T10:14:43.732914Z 0 [Note] [MY-013911] [Server] Crash recovery finished in binlog engine. No attempts to commit, rollback or prepare any transactions.
+2023-01-28T10:14:43.733204Z 0 [Note] [MY-013911] [Server] Crash recovery finished in InnoDB engine. No attempts to commit, rollback or prepare any transactions.
+2023-01-28T10:14:43.741587Z 0 [Note] [MY-012487] [InnoDB] DDL log recovery : begin
+2023-01-28T10:14:43.741866Z 0 [Note] [MY-012488] [InnoDB] DDL log recovery : end
+2023-01-28T10:14:43.750149Z 0 [Note] [MY-012922] [InnoDB] Waiting for purge to start
+2023-01-28T10:14:43.819052Z 0 [System] [MY-000000] [WSREP] Recovered position: 00000000-0000-0000-0000-000000000000:-1
+2023-01-28T10:14:43.820355Z 0 [Note] [MY-012330] [InnoDB] FTS optimize thread exiting.
+2023-01-28T10:14:44.822871Z 0 [Note] [MY-010120] [Server] Binlog end
+2023-01-28T10:14:44.823948Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'mysqlx'
+2023-01-28T10:14:44.824778Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'mysqlx_cache_cleaner'
+2023-01-28T10:14:44.824797Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'ngram'
+2023-01-28T10:14:44.824806Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'BLACKHOLE'
+2023-01-28T10:14:44.824825Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'ARCHIVE'
+2023-01-28T10:14:44.824846Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'TempTable'
+2023-01-28T10:14:44.824853Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'PERFORMANCE_SCHEMA'
+2023-01-28T10:14:44.824979Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'MRG_MYISAM'
+2023-01-28T10:14:44.824991Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'MyISAM'
+2023-01-28T10:14:44.825014Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_SESSION_TEMP_TABLESPACES'
+2023-01-28T10:14:44.825023Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_CACHED_INDEXES'
+2023-01-28T10:14:44.825031Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_VIRTUAL'
+2023-01-28T10:14:44.825037Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_COLUMNS'
+2023-01-28T10:14:44.825044Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_TABLESPACES'
+2023-01-28T10:14:44.825051Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_INDEXES'
+2023-01-28T10:14:44.825058Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_TABLESTATS'
+2023-01-28T10:14:44.825065Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_TABLES'
+2023-01-28T10:14:44.825072Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_FT_INDEX_TABLE'
+2023-01-28T10:14:44.825079Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_FT_INDEX_CACHE'
+2023-01-28T10:14:44.825086Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_FT_CONFIG'
+2023-01-28T10:14:44.825092Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_FT_BEING_DELETED'
+2023-01-28T10:14:44.825100Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_FT_DELETED'
+2023-01-28T10:14:44.825107Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_FT_DEFAULT_STOPWORD'
+2023-01-28T10:14:44.825114Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_METRICS'
+2023-01-28T10:14:44.825121Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_TEMP_TABLE_INFO'
+2023-01-28T10:14:44.825131Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_BUFFER_POOL_STATS'
+2023-01-28T10:14:44.825140Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_BUFFER_PAGE_LRU'
+2023-01-28T10:14:44.825149Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_BUFFER_PAGE'
+2023-01-28T10:14:44.825159Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_CMP_PER_INDEX_RESET'
+2023-01-28T10:14:44.825166Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_CMP_PER_INDEX'
+2023-01-28T10:14:44.825173Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_CMPMEM_RESET'
+2023-01-28T10:14:44.825179Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_CMPMEM'
+2023-01-28T10:14:44.825186Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_CMP_RESET'
+2023-01-28T10:14:44.825193Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_CMP'
+2023-01-28T10:14:44.825200Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'INNODB_TRX'
+2023-01-28T10:14:44.825207Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'InnoDB'
+2023-01-28T10:14:44.825269Z 0 [Note] [MY-013072] [InnoDB] Starting shutdown...
+2023-01-28T10:14:44.895743Z 0 [Note] [MY-013084] [InnoDB] Log background threads are being closed...
+2023-01-28T10:14:45.417151Z 0 [Note] [MY-013854] [InnoDB] Bytes written to disk by DBLWR (ON): 720896
+2023-01-28T10:14:45.417885Z 0 [Note] [MY-012980] [InnoDB] Shutdown completed; log sequence number 19334444
+2023-01-28T10:14:45.419125Z 0 [Note] [MY-012255] [InnoDB] Removed temporary tablespace data file: "ibtmp1"
+2023-01-28T10:14:45.419165Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'MEMORY'
+2023-01-28T10:14:45.419180Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'CSV'
+2023-01-28T10:14:45.419192Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'wsrep'
+2023-01-28T10:14:45.419201Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'daemon_keyring_proxy_plugin'
+2023-01-28T10:14:45.419245Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'sha2_cache_cleaner'
+2023-01-28T10:14:45.419256Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'caching_sha2_password'
+2023-01-28T10:14:45.419281Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'sha256_password'
+2023-01-28T10:14:45.419289Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'mysql_native_password'
+2023-01-28T10:14:45.419574Z 0 [Note] [MY-010733] [Server] Shutting down plugin 'binlog'
+2023-01-28T10:14:45.420296Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.30-26.11)  MySQL Wsrep Server - GPL.
+2023-01-28T10:14:45.836294Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.30-26.11) starting as process 27558
+2023-01-28T10:14:45.845797Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2023-01-28T10:14:46.191973Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2023-01-28T10:14:46.491887Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+
+#################################################Resolution Steps Taken in Troubleshooting the issue####################################################################
+
+First Step
+
+Do not forget to setup passwordless SSH from ClusterControl to all nodes (including the ClusterControl node itself). We are going to use root user for deployment. On ClusterControl node as root user, run:
+
+$ ssh-keygen -t rsa
+$ ssh-copy-id 192.168.10.100 # clustercontrol
+$ ssh-copy-id 192.168.10.101 # galera1
+$ ssh-copy-id 192.168.10.102 # galera2
+$ ssh-copy-id 192.168.10.103 # galera3
+
+#######################################################But even After configuring Password less access/authentication on all master nodes mysql service on second
+node doesn't start and it continuosly throwing error's in /var/log/mysql
+
+2023-01-29T06:02:46.535217Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.30-26.11)  MySQL Wsrep Server - GPL.
+2023-01-29T06:02:46.919204Z 0 [Warning] [MY-011068] [Server] The syntax 'wsrep_slave_threads' is deprecated and will be removed in a future release. Please use wsrep_ap
+plier_threads instead.
+2023-01-29T06:02:46.920596Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.30-26.11) starting as process 80174
+2023-01-29T06:02:47.956699Z 0 [ERROR] [MY-000000] [WSREP] posix_spawnp(wsrep_sst_rsync --role 'joiner' --address '192.168.0.5' --datadir '/var/lib/mysql/'   --parent '8
+0174' --mysqld-version '8.0.30-26.11' --plugin-dir '/usr/lib/mysql/plugin/'   ''  '') failed: 13 (Permission denied)
+2023-01-29T06:02:47.956797Z 0 [ERROR] [MY-000000] [WSREP] Failed to execute: wsrep_sst_rsync --role 'joiner' --address '192.168.0.5' --datadir '/var/lib/mysql/'   --par
+ent '80174' --mysqld-version '8.0.30-26.11' --plugin-dir '/usr/lib/mysql/plugin/'   ''  '' : 13 (Permission denied)
+2023-01-29T06:02:47.956861Z 2 [ERROR] [MY-000000] [WSREP] Failed to prepare for 'rsync' SST. Unrecoverable.
+2023-01-29T06:02:47.957068Z 2 [ERROR] [MY-000000] [WSREP] P: SST request callback failed. This is unrecoverable, restart required.
+2023-01-29T06:02:49.560802Z 0 [Warning] [MY-011068] [Server] The syntax 'wsrep_slave_threads' is deprecated and will be removed in a future release. Please use wsrep_ap
+plier_threads instead.
+
+
+2023-01-29T06:02:51.716034Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.30-26.11)  MySQL Wsrep Server - GPL.
+2023-01-29T06:02:52.111037Z 0 [Warning] [MY-011068] [Server] The syntax 'wsrep_slave_threads' is deprecated and will be removed in a future release. Please use wsrep_applier_threads instead.
+2023-01-29T06:02:52.112437Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.30-26.11) starting as process 80285
+2023-01-29T06:02:53.147868Z 0 [ERROR] [MY-000000] [WSREP] posix_spawnp(wsrep_sst_rsync --role 'joiner' --address '192.168.0.5' --datadir '/var/lib/mysql/'   --parent '80285' --mysqld-version '8.0.30-26.11' --plugin-dir '/usr/lib/mysql/plugin/'   ''  '') failed: 13 (Permission denied)
+2023-01-29T06:02:53.147961Z 0 [ERROR] [MY-000000] [WSREP] Failed to execute: wsrep_sst_rsync --role 'joiner' --address '192.168.0.5' --datadir '/var/lib/mysql/'   --parent '80285' --mysqld-version '8.0.30-26.11' --plugin-dir '/usr/lib/mysql/plugin/'   ''  '' : 13 (Permission denied)
+2023-01-29T06:02:53.148015Z 2 [ERROR] [MY-000000] [WSREP] Failed to prepare for 'rsync' SST. Unrecoverable.
+2023-01-29T06:02:53.148152Z 2 [ERROR] [MY-000000] [WSREP] P: SST request callback failed. This is unrecoverable, restart required.
+2023-01-29T06:02:54.790913Z 0 [Warning] [MY-011068] [Server] The syntax 'wsrep_slave_threads' is deprecated and will be removed in a future release. Please use wsrep_applier_threads instead.
+2023-01-29T06:02:54.792289Z 0 [Note] [MY-010949] [Server] Basedir set to /usr/.
+2023-01-29T06:02:54.792314Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.30-26.11) starting as process 80344
+
+
+2023-01-29T06:03:14.291303Z 0 [Warning] [MY-000000] [WSREP] P: evs::proto(93e883f3-908c, GATHER, view_id(TRANS,93e883f3-908c,0)) install timer expired
+evs::proto(evs::proto(93e883f3-908c, GATHER, view_id(TRANS,93e883f3-908c,0)), GATHER) {
+current_view=view(view_id(TRANS,93e883f3-908c,0) memb {
+        93e883f3-908c,0
+} joined {
+} left {
+} partitioned {
+}),
+input_map=evs::input_map: {aru_seq=-1,safe_seq=-1,node_index=node: {idx=0,range=[0,-1],safe_seq=-1} },
+fifo_seq=25,
+last_sent=-1,
+known:
+1525ff49-90d1 at tcp://192.168.0.4:4567
+{o=0,s=1,i=0,fs=3901,}
+9303d418-8a3d at
+{o=0,s=1,i=0,fs=-1,}
+93e883f3-908c at
+{o=1,s=0,i=0,fs=-1,jm=
+{v=1,t=4,ut=255,o=1,s=-1,sr=-1,as=-1,f=0,src=93e883f3-908c,srcvid=view_id(TRANS,93e883f3-908c,0),insvid=view_id(UNKNOWN,00000000-0000,0),ru=00000000-0000,r=[-1,-1],fs=15,nl=(
+        1525ff49-90d1, {o=0,s=1,e=0,ls=-1,vid=view_id(REG,00000000-0000,0),ss=-1,ir=[-1,-1],}
+        9303d418-8a3d, {o=0,s=1,e=0,ls=-1,vid=view_id(REG,00000000-0000,0),ss=-1,ir=[-1,-1],}
+        93e883f3-908c, {o=1,s=0,e=0,ls=-1,vid=view_id(TRANS,93e883f3-908c,0),ss=-1,ir=[0,-1],}
+        962beb74-911e, {o=0,s=1,e=0,ls=-1,vid=view_id(REG,00000000-0000,0),ss=-1,ir=[-1,-1],}
+        993b9d0c-be56, {o=1,s=0,e=0,ls=-1,vid=view_id(TRANS,993b9d0c-be56,0),ss=-1,ir=[0,-1],}
+)
+},
+}
+:
+)
+},
+}
+962beb74-911e at
+{o=0,s=1,i=0,fs=10,}
+993b9d0c-be56 at tcp://192.168.0.6:4567
+{o=1,s=1,i=0,fs=26,jm=
+{v=1,t=4,ut=255,o=1,s=-1,sr=-1,as=-1,f=4,src=993b9d0c-be56,srcvid=view_id(TRANS,993b9d0c-be56,0),insvid=view_id(UNKNOWN,00000000-0000,0),ru=00000000-0000,r=[-1,-1],fs=2,nl=(
+        93e883f3-908c, {o=1,s=0,e=0,ls=-1,vid=view_id(TRANS,93e883f3-908c,0),ss=-1,ir=[0,-1],}
+        993b9d0c-be56, {o=1,s=0,e=0,ls=-1,vid=view_id(TRANS,993b9d0c-be56,0),ss=-1,ir=[0,-1],}
+)
+},
+}
+install msg={v=1,t=5,ut=255,o=1,s=-1,sr=-1,as=-1,f=6,src=93e883f3-908c,srcvid=view_id(TRANS,93e883f3-908c,0),insvid=view_id(REG,93e883f3-908c,1),ru=00000000-0000,r=[-1,-1],fs=16,nl=(
+        1525ff49-90d1, {o=0,s=1,e=0,ls=-1,vid=view_id(REG,00000000-0000,0),ss=-1,ir=[-1,-1],}
+        9303d418-8a3d, {o=0,s=1,e=0,ls=-1,vid=view_id(REG,00000000-0000,0),ss=-1,ir=[-1,-1],}
+        93e883f3-908c, {o=1,s=0,e=0,ls=-1,vid=view_id(TRANS,93e883f3-908c,0),ss=-1,ir=[0,-1],}
+        962beb74-911e, {o=0,s=1,e=0,ls=-1,vid=view_id(REG,00000000-0000,0),ss=-1,ir=[-1,-1],}
+        993b9d0c-be56, {o=1,s=0,e=0,ls=-1,vid=view_id(TRANS,993b9d0c-be56,0),ss=-1,ir=[0,-1],}
+)
+}
+ }
+2023-01-29T06:03:14.293468Z 0 [Warning] [MY-000000] [WSREP] P: no nodes coming from prim view, prim not possible
+2023-01-29T06:03:17.296454Z 0 [ERROR] [MY-000000] [WSREP] posix_spawnp(wsrep_sst_rsync --role 'joiner' --address '192.168.0.5' --datadir '/var/lib/mysql/'   --parent '80396' --mysqld-version '8.0.30-26.11' --plugin-dir '/usr/lib/mysql/plugin/'   ''  '') failed: 13 (Permission denied)
+2023-01-29T06:03:17.296563Z 0 [ERROR] [MY-000000] [WSREP] Failed to execute: wsrep_sst_rsync --role 'joiner' --address '192.168.0.5' --datadir '/var/lib/mysql/'   --parent '80396' --mysqld-version '8.0.30-26.11' --plugin-dir '/usr/lib/mysql/plugin/'   ''  '' : 13 (Permission denied)
+2023-01-29T06:03:17.296610Z 2 [ERROR] [MY-000000] [WSREP] Failed to prepare for 'rsync' SST. Unrecoverable.
+2023-01-29T06:03:17.296789Z 2 [ERROR] [MY-000000] [WSREP] P: SST request callback failed. This is unrecoverable, restart required.
+2023-01-29T06:03:17.800190Z 0 [Warning] [MY-011068] [Server] The syntax 'wsrep_slave_threads' is deprecated and will be removed in a future release. Please use wsrep_applier_threads instead.
+
+
+
+2023-01-29T06:03:20.004939Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.30-26.11)  MySQL Wsrep Server - GPL.
+2023-01-29T06:03:20.392234Z 0 [Warning] [MY-011068] [Server] The syntax 'wsrep_slave_threads' is deprecated and will be removed in a future release. Please use wsrep_ap
+plier_threads instead.
+2023-01-29T06:03:20.393675Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.30-26.11) starting as process 80529
+2023-01-29T06:03:50.931441Z 0 [ERROR] [MY-000000] [WSREP] P: failed to open gcomm backend connection: 110: failed to reach primary view: 110 (Connection timed out)
+         at /tmp/workspace/aws-galera-4-deb-packages/label/build-ubuntu-focal-amd64/deb-build-galera/gcomm/src/pc.cpp:connect():160
+2023-01-29T06:03:50.931539Z 0 [ERROR] [MY-000000] [WSREP] P: /tmp/workspace/aws-galera-4-deb-packages/label/build-ubuntu-focal-amd64/deb-build-galera/gcs/src/gcs_core.c
+pp:gcs_core_open():219: Failed to open backend connection: -110 (Connection timed out)
+2023-01-29T06:03:51.932154Z 0 [ERROR] [MY-000000] [WSREP] P: /tmp/workspace/aws-galera-4-deb-packages/label/build-ubuntu-focal-amd64/deb-build-galera/gcs/src/gcs.cpp:gc
+s_open():1663: Failed to open channel 'galera_cluster' at 'gcomm://192.168.0.4,192.168.0.5,192.168.0.6': -110 (Connection timed out)
+2023-01-29T06:03:51.932250Z 0 [ERROR] [MY-000000] [WSREP] P: gcs connect failed: Connection timed out
+2023-01-29T06:03:51.932270Z 0 [ERROR] [MY-000000] [WSREP] wsrep::connect(gcomm://192.168.0.4,192.168.0.5,192.168.0.6) failed: 7
+2023-01-29T06:03:51.932287Z 0 [ERROR] [MY-010119] [Server] Aborting
+2023-01-29T06:03:51.947221Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.30-26.11)  MySQL Wsrep Server - GPL.
+2023-01-29T06:27:18.703560Z 0 [Warning] [MY-011068] [Server] The syntax 'wsrep_slave_threads' is deprecated and will be removed in a future release. Please use wsrep_ap
+plier_threads instead.
+###############################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
+#######################Suggestion After This is following Steps %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+https://github.com/codership/mysql-wsrep/issues/391
+
+MySQL wsrep 8.0.23-26.6 on Ubuntu 20.04 - Permission denied #391
+
+The error doesn't seem to be Ubuntu-specific but rather a general problem with Debian-based systems. For each combination of operating system and software version, I bootstrapped one node and then tried to join a second node to it. Reliably and repeatably, this works on CentOS but fails on Ubuntu and Debian.
+
+galera 4 /              mysql-wsrep 8.0	      galera 3 / mysql-wsrep 5.7
+CentOS 8	        no problem	                 no problem
+Debian 11 "bullseye"	  failure	                 failure
+Ubuntu 20.04 "Focal Fossil" failure	         failure
+
+
+Here, failure means that the second node won't join the cluster. mysqld repeatedly starts, only to shutdown right away and print the above messages. The node contacts the cluster, negotiates SST and then fails to spawn a process. The restart loop is probably due to systemd.
+
+As of now, I suspect that the error is independent of:
+
+the choice of wsrep_sst_method
+the version of galera/wsrep used
+the release of the operating system (as long as it is derived from Debian)
+Attached as demonstration.zip are a Vagrantfile and scripts to spin up the virtual machines I used: Make your choice of operating system and software version, and vagrant creates a cluster of several several identical hosts for you. Every node comes with ports opened in the firewall, selinux/apparmor disabled, galera and mysql-wsrep installed and configured but not running.
+
+Also, I looked for messages containing "posix_spawnp(...) failed", "Failed to execute: ...", and "Failed to prepare ... for SST" in the source code. The following table is a complete list.
+
+message	file:line	function
+posix_spawnp	sql/wsrep_utils.cc:307	wsp::process::process
+failed to execute	sql/wsrep_sst.cc:421	sst_joiner_thread
+failed to execute	sql/wsrep_sst.cc:1002	sst_donor_thread
+failed to prepare	sql/wsrep_sst.cc:711	wsrep_sst_prepare
+
+Thanks for the Vagrant scripts, they were very helpful in reproducing the issue.
+
+It appears that this is already known issue, reported here #367. With the following change in provisioning, the Apparmor gets properly disabled for mysqld:
+
+diff --git a/Vagrantfile b/Vagrantfile
+index 9e60024..73da0d8 100644
+--- a/Vagrantfile
++++ b/Vagrantfile
+@@ -38,9 +38,11 @@ debian_script = <<~EOF
+ 
+   # Disable apparmor to make sure that it doesn't interfere with the execution
+   # of mysql-wsrep.
+-  systemctl stop apparmor
+-  systemctl disable apparmor
+-
++  if ! [ -f /etc/apparmor.d/disable/usr.sbin.mysqld ]
++  then
++    ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/usr.sbin.mysqld
++    apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
++  fi
+   # Open ports for mysql, galera, rsync
+   for tcp_port in 3306 4567 4568 4444; do
+     iptables --append INPUT --protocol tcp --match tcp --dport $tcp_port --source 10.0.0.0/24 --jump ACCEPT
+
+
+####################$$$$$$$$$$$$$$$$$$    TO  BE NOTED PRECISELY BELOW INPUTS WHICH WORKS EXACTLY  ^^^^^^^^^^^^^&&&&&&&&&&&&&@@@@@@@@@@#############################
+####################################################################################################################################################################
+Thank you for the advice. With the apparmor profile disabled, the error no longer appears. I needed to move your inserted lines after calling apt-get install, but that only makes sense.
+
+One exception: galera-3/mysql-wsrep-5.7 on Debian requires a manual installation of lsof on the joiner node. There is bug #57 addressing the same issue for mysql-wsrep-5.6, but it seems to have reappeared in 5.7.
+
+I'ts a bit confusing that systemd stop/disable apparmor doesn't have the desired effect. Instead (and as mentioned in the Debian wiki), you have to supply parameters on the kernel command line. We had, in fact, suspected apparmor, but did not anticipate systemctl being the wrong tool to take it out of the equation.
+
+The error was originally observed on machines in the amazon cloud, to which I currently don't have access. If one were paranoid, the fix should be confirmed in the original setup. Pending that, I'm happy to consider this a duplicate of #367.
+
+
+What further is confusing that we never had this issue in the past on Debian nor Ubuntu systems. So something new in Debian/Ubuntu or new in systemd? Or where we just so lucky that AppArmor was always disabled in the past? So this would be the new thing then...
+
+################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
+Disable AppArmor
+AppArmor is a security mechanism and disabling it is not recommended. If you really need to disable AppArmor on your system:
+
+
+$ sudo mkdir -p /etc/default/grub.d
+$ echo 'GRUB_CMDLINE_LINUX_DEFAULT="$GRUB_CMDLINE_LINUX_DEFAULT apparmor=0"' \
+  | sudo tee /etc/default/grub.d/apparmor.cfg
+$ sudo update-grub
+$ sudo reboot
+
+And then check with commands 
+
+List the current status of apparmor
+aa-status
+
+First check the current status of the AppArmor on your Ubuntu 20.04 system:
+apparmor_status
+
+ls /etc/apparmor.d/
+abstractions    lsb_release      usr.bin.evince                        usr.lib.libreoffice.program.senddoc      usr.sbin.cups-browsed  usr.sbin.rsyslogd
+disable         nvidia_modprobe  usr.bin.firefox                       usr.lib.libreoffice.program.soffice.bin  usr.sbin.cupsd         usr.sbin.tcpdump
+force-complain  sbin.dhclient    usr.bin.man                           usr.lib.libreoffice.program.xpdfimport   usr.sbin.ippusbxd
+local           tunables         usr.lib.libreoffice.program.oosplash  usr.lib.snapd.snap-confine.real          usr.sbin.mysqld
