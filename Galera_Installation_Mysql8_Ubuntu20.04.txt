@@ -1,0 +1,39 @@
+Installing Galera 4 with MySQL 8 on Ubuntu 20.04
+A question has cropped up recently: how does one install Galera Cluster 4 with MySQL 8 on Ubuntu 20.04 LTS (Focal Fossa)? This quick guide will get you started.
+
+Install 3 Galera Cluster nodes with the base OS being Ubuntu 20.04. Remember to run apt update and apt upgrade.
+
+Once this is done, edit: /etc/apt/sources.list.d/galera.list and add the following lines:
+
+deb https://releases.galeracluster.com/galera-4/ubuntu focal main
+deb https://releases.galeracluster.com/mysql-wsrep-8.0/ubuntu focal main
+Once that is done, don’t forget to also pin the preference to the Galera Cluster repository. To do this, edit: /etc/apt/preferences.d/galera.pref and have it read:
+
+# Prefer the Codership repository
+Package: *
+Pin: origin releases.galeracluster.com
+Pin-Priority: 1001
+Once you are done, run apt update yet again. Now you are ready to install Galera Cluster 4 with MySQL 8, just by executing:
+
+apt install galera-4 mysql-wsrep-8.0
+The system is interactive so you also have to enter a strong root password. We cover this in a past blog post titled Installing Galera Cluster 4 with MySQL 8 on Ubuntu 18.04.
+
+Once the install is complete, feel free to add an appropriate my.cnf file by editing /etc/mysql/mysql.conf.d/mysqld.cnf and adding some configuration to it. We cover a basic configuration to get started in Using Galera Manager to monitor your existing Galera Clusters.
+
+Once that is done, remember to stop MySQL by executing systemctl stop mysql and on the first node, run:
+
+mysqld_bootstrap
+Now you can execute and see a similar result:
+
+mysql -uroot -p -e "show status like 'wsrep_cluster_size'"
+Enter password: 
++--------------------+-------+
+| Variable_name      | Value |
++--------------------+-------+
+| wsrep_cluster_size | 1     |
++--------------------+-------+
+Start Node 2 by doing systemctl start mysql and you will be able to execute the above and see the value increase to 2, and when you do it on the third node, the value will increase to 3.
+
+You now have a Galera Cluster 4 with MySQL 8 running on Ubuntu 20.04 LTS. Happy clustering!
+
+
