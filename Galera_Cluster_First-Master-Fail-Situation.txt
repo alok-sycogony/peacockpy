@@ -1,0 +1,21 @@
+when executing following command on first master Galera Cluster Node .
+mysqld_bootstrap
+
+It will show following logs in /var/log/mysql/error.log
+
+edit the grastate.dat file manually and set safe_to_bootstrap to 1 .
+
+
+2023-01-29T06:21:19.322396Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.30-26.11) starting as process 1706
+2023-01-29T06:21:19.343773Z 0 [ERROR] [MY-000000] [WSREP] P: It may not be safe to bootstrap the cluster from this node. It was not the last one to leave the cluster and may not contain all the updates. To force cluster bootstrap with this node, edit the grastate.dat file manually and set safe_to_bootstrap to 1 .
+
+Please edit the file grastate.dat and change safe_to_bootstrap: 1 
+to boot strap the first master node after Failure ,Reboot and any misclaneous issue.
+root@node1:~# cd /var/lib/mysql
+root@node1:/var/lib/mysql# cat grastate.dat
+# GALERA saved state
+version: 2.1
+uuid:    6e837aba-9f04-11ed-b1d8-a7f0ffc989f1
+seqno:   -1
+safe_to_bootstrap: 0
+
