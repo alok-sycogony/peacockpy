@@ -1,0 +1,121 @@
+root@node3:~# history
+    1  vi /etc/ssh/sshd_config
+    2  ufw allow 2282
+    3  ufw allow ssh
+    4  ufw enable
+    5  service sshd restart
+    6  passwd root
+    7  ip a
+    8  exit
+    9  ip a
+   10  apt install galera-4 mysql-wsrep-8.0
+   11  systemctl status mysql
+   12  systemctl enable mysql
+   13  ip a
+   14  ll /etc/mysql/mysql.conf.d/mysqld.cnf
+   15  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+   16  vim /etc/mysql/mysql.conf.d/mysqld.cnf
+   17  systemctl status mysql
+   18  systemctl stop mysql
+   19  systemctl status mysql
+   20  ip a
+   21  cat /etc/mysql/mysql.conf.d/mysqld.cnf| grep 192.168.0.6
+   22  ip a
+   23  systemctl status mysql
+   24  ip a
+   25  systemctl status mysql
+   26  ip a
+   27  systemctl start mysql
+   28  systemctl status mysql
+   29  mysql -u root -p
+   30  ip a
+   31  systemctl status mysql
+   32  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+   33  tail /var/log/mysql/error.log
+   34  less /var/log/mysql/error.log
+   35  ip a
+   36  ping 192.168.0.5
+   37  telnet 192.168.0.5 4567
+   38  ss -tulpen
+   39  ip a
+   40  history
+   41  date
+   42  ip a
+   43  timedatectl set-timezone Asia/Kolkata
+   44  date
+   45  ip a
+   46  tail /var/log/mysql/error.log
+   47  cat /etc/mysql/mysql.conf.d/mysqld.cnf
+   48  exit
+   49  ip a
+   50  blkid
+   51  df -h
+   52  apt update
+   53  cat /etc/os-release
+   54  apt upgrade
+   55  cat /etc/os-release
+   56  ll /etc/apt/sources.list.d/galera.list
+   57  ip a
+   58  vim /etc/apt/sources.list.d/galera.list
+   59  ip a
+   60  vim /etc/apt/preferences.d/galera.pref
+   61  ip a
+   62  apt update
+   63  history
+   64  ip a
+   65  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D669017EBC19DDBA
+   66  apt-key list
+   67  apt update
+   68  screen
+   69  ip a
+   70  exit
+   71  ip a
+   72  systemctl status apparmor
+   73  systemctl stop apparmor
+   74  systemctl status apparmor
+   75  hostnamectl
+   76  cat /etc/hostname
+   77  hostnamectl set-hostname node3
+   78  hostnamectl
+   79  ip a
+   80  exit
+   81  systemctl status sshd
+   82  vim /etc/ssh/sshd_config
+   83  systemctl status sshd
+   84  systemctl restart sshd
+   85  systemctl status sshd
+   86  ip a
+   87  ssh-keygen -t rsa
+   88  ssh-copy-id 192.168.0.4
+   89  ssh-copy-id 192.168.0.5
+   90  ssh-copy-id 192.168.0.6
+   91  ip a
+   92  ssh 192.168.0.4
+   93  ssh 192.168.0.5
+   94  ssh 192.168.0.6
+   95  ip a
+   96  systemctl status mysql
+   97  systemctl start mysql
+   98  systemctl status mysql
+   99  ip a
+  100  systemctl status mysql
+  101  ip a
+  102  ssh-copy-id 192.168.0.5
+  103  ip a
+  104  mkdir -p /etc/default/grub.d
+  105  echo 'GRUB_CMDLINE_LINUX_DEFAULT="$GRUB_CMDLINE_LINUX_DEFAULT apparmor=0"'   | sudo tee /etc/default/grub.d/apparmor.cfg
+  106  update-grub
+  107  reboot
+  108  aa-status
+  109  ip a
+  110  ll
+  111  systemctl status mysql
+  112*
+  113  systemctl status mysql
+  114  cat /var/log/mysql/error.log
+  115  ip a
+  116  mysql -u root -p
+  117  ip a
+  118  mysql -u root -p
+  119  cat /var/log/mysql/error.log
+
