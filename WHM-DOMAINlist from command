@@ -1,0 +1,2 @@
+cat /etc/localdomains | less
+cat /etc/localdomains > /tmp/DomainList.txt
